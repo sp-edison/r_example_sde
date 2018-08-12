@@ -25,13 +25,15 @@ sde <- list()
 for (line in lines) {
 	data <- unlist(strsplit(line, " "))
 	if (data[1] == 'INT1') {
-		sde$int1 = data[2];
+		sde$int1 = as.integer(data[2]);
 	} else if (data[1] == 'REAL1') {
-		sde$real1 = data[2];
+		sde$real1 = as.double(data[2]);
 	} else if (data[1] == 'LIST1') {
 		sde$list1 = data[2];
     } else if (data[1] == 'VECTOR1') {
-		sde$vector1 = c(data[3], data[4], data[5]);
+		sde$vector1 = c(as.integer(data[3]),
+						as.integer(data[4]),
+						as.integer(data[5]));
     }
 }
 

@@ -18,14 +18,24 @@ if (is.null(opt$inp)){
 inputfile = opt$inp;
 
 ## input param ##
-input <- data.frame(t(read.table(inputfile, row.names = 1, sep = "=",
-                                comment.char = ";",
-                                strip.white = TRUE,
-                                stringsAsFactors = FALSE)), stringsAsFactors = FALSE);
-input.ed=input;
-search.var <- c("a","b","c","d");
+lines <- readLines(inputfile);
 
-cat('a is ', input$a, '\n');
-cat('b is ', input$b, '\n');
-cat('c is ', input$c, '\n');
-cat('d is ', input$d, '\n');
+sde <- list()
+
+for (line in lines) {
+	data <- unlist(strsplit(line, " "))
+	if (data[1] == 'INT1') {
+		sde$int1 = data[2];
+	} else if (data[1] == 'REAL1') {
+		sde$real1 = data[2];
+	} else if (data[1] == 'LIST1') {
+		sde$list1 = data[2];
+    } else if (data[1] == 'VECTOR1') {
+		sde$vector1 = c(data[3], data[4], data[5]);
+    }
+}
+
+cat('INT1 is ', sde$int1, '\n');
+cat('REAL1 is ', sde$real1, '\n');
+cat('LIST1 is ', sde$list1, '\n');
+cat('VECTOR1 is ', sde$vector1, '\n');
